@@ -1,0 +1,24 @@
+# General suite definitions
+# -------------------------
+init_cycle: 2020-12-15T00:00:00Z
+last_cycle: 2021-01-13T00:00:00Z
+step_cycle: PT6H
+
+# Generic applications-related definitions
+# ----------------------------------------
+github: https://github.com/noaa-emc
+
+# Repos
+generic_repos:
+  - url: $(github)/ufs-workflows.git
+    branch: develop
+
+# Model-related definitions
+# -------------------------
+
+#models:
+#  - config: !INCLUDE ./gfs.yaml
+
+# Environment
+user: ${USER}
+test: ${test}
