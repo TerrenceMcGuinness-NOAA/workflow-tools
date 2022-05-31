@@ -62,7 +62,7 @@ class Template:
 
 
     @classmethod
-    def replace_structure_from_environment(cls, strcture_to_replace):
+    def replace_from_environment(cls, strcture_to_replace):
         return cls.replace_structure(strcture_to_replace, cls.DOLLAR_CURLY_BRACE, os.environ.get)
 
 

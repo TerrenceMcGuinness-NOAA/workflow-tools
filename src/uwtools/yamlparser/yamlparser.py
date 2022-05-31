@@ -19,7 +19,7 @@ class YamlParser(NamedDict):
                 print(exc)
             if config is None:
                 config = {}
-            config = Template.replace_structure_from_environment(config)
+            config = Template.replace_from_environment(config)
             config = Template.replace_with_dependencies(config,config)
         #self.update(config)
         self.update(NamedDict(config))
