@@ -10,8 +10,8 @@ github: https://github.com/noaa-emc
 
 # Repos
 generic_repos:
-  - url: $(github)/ufs-workflows.git
-    branch: develop
+   url: $(github)/ufs-workflows.git
+   branch: develop
 
 # Model-related definitions
 # -------------------------
