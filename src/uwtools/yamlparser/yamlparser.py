@@ -21,5 +21,5 @@ class YamlParser(NamedDict):
                 config = {}
             config = Template.replace_structure_from_environment(config)
             config = Template.replace_with_dependencies(config,config)
-        self.update(config)
-        #self.update(NamedDict(config))
+        #self.update(config)
+        self.update(NamedDict(config))
