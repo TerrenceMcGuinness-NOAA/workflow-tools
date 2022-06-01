@@ -14,14 +14,16 @@ class Config(NamedDict):
         super().__init__()
         if config_file is not None:
             config = load_yaml(config_file, False)
-        else:
-            config = data
-        if config is not None:
+        if ( data is not None ) and ( config  is not None):
+            if parse == True:
+                config = Template.replace_from_environment(config)
+                config = Template.replace_with_dependencies(config,data)
+        elif config is not None:
             if parse is True:
                 config = Template.replace_from_environment(config)
                 config = Template.replace_with_dependencies(config,config)
 
-            self.update(self._configure(config))
+        self.update(self._configure(config))
 
     def _configure(self, config):
         for key, value in config.items():

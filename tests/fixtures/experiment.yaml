@@ -16,9 +16,10 @@ generic_repos:
 # Model-related definitions
 # -------------------------
 
-#models:
+models:
+     experiment_dir: /home/myexpid
 #  - config: !INCLUDE ./gfs.yaml
+
 
 # Environment
 user: ${USER}
-test: ${test}

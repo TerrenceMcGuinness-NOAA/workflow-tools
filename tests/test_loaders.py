@@ -42,3 +42,25 @@ def test_YAML_loader_parse_env():
     actual = props.user
 
     assert actual == expected
+
+def test_YAML_loader_parse_env():
+
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
+
+    expected = os.environ.get('USER')
+    actual = props.user
+
+    assert actual == expected
+
+def test_YAML_loader_update():
+
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
+    print(props.models.experiment_dir)
+
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/gfs.yaml")),props)
+    print(props.datapath)
+
+    expected =  "/home/myexpid/{{current_cycle}}"
+    actual = props.datapath
+
+    assert actual == expected
