@@ -4,6 +4,7 @@ import pytest
 import os
 
 from uwtools.loaders import load_yaml
+from uwtools.configure import Config
 
 file_base = os.path.dirname(__file__)
 
@@ -25,7 +26,8 @@ def test_yaml_loader_loads_correctly():
 
 def test_loader_dot_notation():
 
-    props = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml"), parse=False))
+    #props = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml"), parse=False))
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml")))
 
     expected = "abcd"
     actual = props.jobname
@@ -34,7 +36,7 @@ def test_loader_dot_notation():
 
 def test_YAML_loader_parse_env():
 
-    props = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml"), parse=True))
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
 
     expected = os.environ.get('USER')
     actual = props.user

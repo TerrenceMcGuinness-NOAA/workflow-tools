@@ -8,23 +8,17 @@ import pathlib
 from yaml import load, YAMLError
 
 try:
-    from yaml import CLoader as Loader
+    from yaml import CLoader as BaseLoader
 except ImportError:
     from yaml import Loader
 
 from uwtools.nameddict import NamedDict
 from uwtools.template import Template
 
-class Config(NamedDict):
-    def __init__(self, d=None):
-        super().__init__(d)
-    def __getattr__(self, d=None):
-        return Config()
-
 def load_yaml(_path: pathlib.Path, parse=True):
     with open(_path, "r") as _file:
         try:
-            props = NamedDict(load(_file, Loader=Loader))
+            props = NamedDict(load(_file, Loader=BaseLoader))
         except YAMLError as exc:
             print(exc)
 
