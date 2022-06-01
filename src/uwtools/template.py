@@ -4,6 +4,8 @@ import copy
 from collections import namedtuple
 from collections.abc import Sequence
 
+from uwtools.nameddict import NamedDict
+
 class Template:
 
     DOLLAR_CURLY_BRACE = '${}'
@@ -50,7 +52,7 @@ class Template:
 
     @classmethod
     def replace_structure(cls, strcture_to_replace, var_type: str, get_value):
-        if isinstance(strcture_to_replace, dict):
+        if isinstance(strcture_to_replace, NamedDict):
             for key, item in strcture_to_replace.items():
                 strcture_to_replace[key] = cls.replace_structure(item, var_type, get_value)
         elif isinstance(strcture_to_replace, Sequence) and not isinstance(strcture_to_replace, str):
@@ -79,7 +81,7 @@ class Template:
     @classmethod
     def build_index(cls, dictionary, excluded=None, shallow_precedence=True):
         def build(structure, variables):
-            if isinstance(structure, dict):
+            if isinstance(structure, NamedDict):
                 for k, i in structure.items():
                     if ((k not in variables) or (k in variables and not shallow_precedence)) and k not in excluded:
                         variables[k] = i
