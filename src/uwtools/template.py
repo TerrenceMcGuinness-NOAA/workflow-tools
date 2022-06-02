@@ -70,7 +70,6 @@ class Template:
 
     @classmethod
     def replace_with_type(cls, dictionary, keys, var_type, shallow_precedence=True, excluded=()):
-        #var_type = cls.DOLLAR_PARENTHESES
         all_variables = cls.build_index(keys, excluded, shallow_precedence)
         previous = {}
         while dictionary != previous:
