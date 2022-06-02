@@ -8,7 +8,7 @@ from uwtools.configure import Config
 
 file_base = os.path.dirname(__file__)
 
-def test_yaml_loader_loads_correctly():
+def test_YAML_loader_loads_correctly():
     actual = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml"),parse=False))
 
     expected = {
@@ -19,20 +19,19 @@ def test_yaml_loader_loads_correctly():
         "nodes": 1,
         "queue": "bos",
         "tasks_per_node": 4,
-        "walltime": "00:01:00"
-        }
+        "walltime": "00:01:00",
+    }
     assert actual == expected
 
 
-def test_loader_dot_notation():
+def test_YAML_loader_dot_notation():
 
-    #props = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml"), parse=False))
-    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml")))
+    props = load_yaml(pathlib.Path(os.path.join(file_base,"fixtures/simple.yaml"), parse=False))
 
     expected = "abcd"
     actual = props.jobname
-
     assert actual == expected
+
 
 def test_YAML_loader_parse_env():
 
@@ -40,25 +39,13 @@ def test_YAML_loader_parse_env():
 
     expected = os.environ.get('USER')
     actual = props.user
-
     assert actual == expected
 
-def test_YAML_loader_parse_env():
-
-    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
-
-    expected = os.environ.get('USER')
-    actual = props.user
-
-    assert actual == expected
 
 def test_YAML_loader_update():
 
     props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
-    print(props.models.experiment_dir)
-
     props = Config(pathlib.Path(os.path.join(file_base,"fixtures/gfs.yaml")),props)
-    print(props.datapath)
 
     expected =  "/home/myexpid/{{current_cycle}}"
     actual = props.datapath
