@@ -18,10 +18,12 @@ class Config(NamedDict):
             if parse == True:
                 config = Template.replace_from_environment(config)
                 config = Template.replace_with_dependencies(config,data)
+                config = Template.replace_with_realtime_dependencies(config,data)
         elif config is not None:
             if parse is True:
                 config = Template.replace_from_environment(config)
                 config = Template.replace_with_dependencies(config,config)
+                config = Template.replace_with_realtime_dependencies(config,config)
 
         self.update(self._configure(config))
 

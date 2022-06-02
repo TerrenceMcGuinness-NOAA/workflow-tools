@@ -21,7 +21,7 @@ class Template:
     replacements = {
          DOLLAR_CURLY_BRACE: var_name(ENV_regex,slice(2,-1)),
          DOLLAR_PARENTHESES: var_name(SUB_regex,slice(2,-1)),
-         DOUBLE_CURLY_BRACES: var_name(ENV_regex,slice(2,-2))  }
+         DOUBLE_CURLY_BRACES: var_name(CYC_regex,slice(2,-2))  }
 
     @classmethod
     def replace_string(cls, var_to_sub, var_type: str, get_value):
@@ -69,14 +69,22 @@ class Template:
 
 
     @classmethod
-    def replace_with_dependencies(cls, dictionary, keys, shallow_precedence=True, excluded=()):
-        var_type = cls.DOLLAR_PARENTHESES
+    def replace_with_type(cls, dictionary, keys, var_type, shallow_precedence=True, excluded=()):
+        #var_type = cls.DOLLAR_PARENTHESES
         all_variables = cls.build_index(keys, excluded, shallow_precedence)
         previous = {}
         while dictionary != previous:
             previous = copy.deepcopy(dictionary)
             dictionary = cls.replace_structure(dictionary, var_type, all_variables.get)
         return dictionary
+
+    @classmethod
+    def replace_with_dependencies(cls, dictionary, keys):
+        return cls.replace_with_type(dictionary, keys, cls.DOLLAR_PARENTHESES)
+
+    @classmethod
+    def replace_with_realtime_dependencies(cls, dictionary, keys):
+        return cls.replace_with_type(dictionary, keys, cls.DOUBLE_CURLY_BRACES )
 
     @classmethod
     def build_index(cls, dictionary, excluded=None, shallow_precedence=True):

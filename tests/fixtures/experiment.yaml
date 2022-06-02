@@ -23,3 +23,4 @@ models:
 
 # Environment
 user: ${USER}
+my_current_cycle: 10102022

@@ -51,3 +51,13 @@ def test_YAML_loader_update():
     actual = props.datapath
 
     assert actual == expected
+
+def test_YAML_loader_realtime_update():
+
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/gfs.yaml")),props)
+
+    expected =  "/home/myexpid/10102022"
+    actual = props.updated_datapath
+
+    assert actual == expected
