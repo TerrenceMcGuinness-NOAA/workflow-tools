@@ -52,6 +52,15 @@ def test_YAML_loader_update():
 
     assert actual == expected
 
+def test_YAML_loader_inplace_update():
+
+    props = Config(pathlib.Path(os.path.join(file_base,"fixtures/gfs.yaml")))
+
+    expected =  "testpassed"
+    actual = props.testupdate
+
+    assert actual == expected
+
 def test_YAML_loader_realtime_update():
 
     props = Config(pathlib.Path(os.path.join(file_base,"fixtures/experiment.yaml")))
