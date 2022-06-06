@@ -9,11 +9,10 @@ vertical_resolution: 64
 
 executable: ${UFSEXEC}
 
-updatethis: 'testpassed'
-
 filetype: gfs
 datapath: '$(experiment_dir)/{{current_cycle}}'
-updated_datapath: '$(experiment_dir)/{{my_current_cycle}}'
 filename_core: 'fv_core.res.nc'
 
+updatethis: 'testpassed'
 testupdate: $(updatethis)
+updated_datapath: '$(experiment_dir)/{{my_current_cycle}}'
